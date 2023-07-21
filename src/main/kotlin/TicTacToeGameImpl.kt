@@ -1,8 +1,8 @@
-class TicTacToeGameImpl(override var currentPlayer: Player) : TicTacToeGame {
+class TicTacToeGameImpl(override var currentPlayer: Player, override var boardSize: Int) : TicTacToeGame {
     private lateinit var board: Array<Array<Int>>
 
     override fun initGame() {
-        board = Array(3) { Array(3) { -1 } }
+        board = Array(boardSize) { Array(boardSize) { -1 } }
     }
 
     override fun boardIsEmpty(): Boolean {
@@ -63,13 +63,13 @@ class TicTacToeGameImpl(override var currentPlayer: Player) : TicTacToeGame {
             row += 1
             column -= 1
 
-            if (leftToRight.size == 3 && leftToRight.all { it == 1 }) {
+            if (leftToRight.size == boardSize && leftToRight.all { it == 1 }) {
                 throw WinnerDeclared("We have a winner 1!")
             }
-            if (leftToRight.size == 3 && leftToRight.all { it == 0 }) {
+            if (leftToRight.size == boardSize && leftToRight.all { it == 0 }) {
                 throw WinnerDeclared("We have a winner 0!")
             }
-            if (leftToRight.size == 3) {
+            if (leftToRight.size == boardSize) {
                 leftToRight.clear()
             }
         }
@@ -84,13 +84,13 @@ class TicTacToeGameImpl(override var currentPlayer: Player) : TicTacToeGame {
             leftToRight.add(current)
             size -= 1
 
-            if (leftToRight.size == 3 && leftToRight.all { it == 1 }) {
+            if (leftToRight.size == boardSize && leftToRight.all { it == 1 }) {
                 throw WinnerDeclared("We have a winner 1!")
             }
-            if (leftToRight.size == 3 && leftToRight.all { it == 0 }) {
+            if (leftToRight.size == boardSize && leftToRight.all { it == 0 }) {
                 throw WinnerDeclared("We have a winner 0!")
             }
-            if (leftToRight.size == 3) {
+            if (leftToRight.size == boardSize) {
                 leftToRight.clear()
             }
         }
@@ -105,10 +105,10 @@ class TicTacToeGameImpl(override var currentPlayer: Player) : TicTacToeGame {
                 columnItem.add(board[index][size])
             }
             size -= 1
-            if (columnItem.size == 3 && columnItem.all { it == 1 }) {
+            if (columnItem.size == boardSize && columnItem.all { it == 1 }) {
                 throw WinnerDeclared("We have a winner 1!")
             }
-            if (columnItem.size == 3 && columnItem.all { it == 0 }) {
+            if (columnItem.size == boardSize && columnItem.all { it == 0 }) {
                 throw WinnerDeclared("We have a winner 0!")
             }
             columnItem.clear()
@@ -122,10 +122,10 @@ class TicTacToeGameImpl(override var currentPlayer: Player) : TicTacToeGame {
                 println("$x,$y = $value")
                 rowItem.add(value)
             }
-            if (rowItem.size == 3 && rowItem.all { it == 1 }) {
+            if (rowItem.size == boardSize && rowItem.all { it == 1 }) {
                 throw WinnerDeclared("We have a winner 1!")
             }
-            if (rowItem.size == 3 && rowItem.all { it == 0 }) {
+            if (rowItem.size == boardSize && rowItem.all { it == 0 }) {
                 throw WinnerDeclared("We have a winner 0!")
             }
             rowItem.clear()
